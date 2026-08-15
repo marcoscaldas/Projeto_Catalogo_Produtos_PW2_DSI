@@ -9,6 +9,6 @@ app.use(express.json());
 
 app.use("/api/produtos", produtoRoutes);
 
-app.listen(PORTA, () => {
+app.listen(PORT, () => {
   console.log(`Servidor executando em http://localhost:${PORT}`);
 });
