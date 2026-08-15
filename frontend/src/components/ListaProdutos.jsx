@@ -4,9 +4,12 @@ function ListaProdutos({ produtos }) {
   if (produtos.length === 0) {
     return <p>Nenhum produto cadastrado.</p>;
   }
-
   return (
     <section>
+      <p>
+        Quantidade de produtos: <strong>{produtos.length}</strong>
+      </p>
+   
       <h2 className="titulo-secao">Produtos cadastrados</h2>
 
       <div className="grid">

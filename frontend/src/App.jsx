@@ -63,6 +63,24 @@ function App() {
       </main>
     </>
   );
+  async function contarProdutos(produto){
+    try{
+      const resposta = await fetch("/api/produtos")
+      produtos.length
+      if(produtos.length =+ 1){
+        setMensagem("Lista atualizada com sucesso")
+      }else{
+          setResprodutos.length + 1
+        setMensagem("Lista atualizada com sucesso")
+      }
+    }catch{
+      
+
+
+
+
+    }
+  }
 }
 
 export default App;
