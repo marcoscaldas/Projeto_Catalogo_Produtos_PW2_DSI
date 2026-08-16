@@ -2,7 +2,6 @@
 
 O Back-end foi mantido sem alterações.
 
-Todas as mudanças no código foram marcadas com comentários contendo:
 
 `ALTERAÇÃO LIVE 15/08/2026`
 
@@ -58,13 +57,3 @@ ou, no caso de arquivo novo:
 - Formulário e busca destacados.
 - Layout responsivo.
 - Footer integrado ao tema.
-
-## Ordem sugerida para a live
-
-1. Mostrar o projeto original funcionando.
-2. Criar o contador de produtos.
-3. Fazer a validação do formulário.
-4. Criar a busca com `filter()`.
-5. Criar o `Footer.jsx`.
-6. Aplicar o novo CSS.
-7. Testar tudo integrado ao Back-end já existente.
