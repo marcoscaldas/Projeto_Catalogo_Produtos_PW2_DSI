@@ -1,12 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react"; // ALTERADO: adicionado useEffect
 
-function FormProduto({ aoCadastrar }) {
+// ALTERADO: novas props para edição
+function FormProduto({ aoCadastrar, aoAlterar, produtoEmEdicao, aoCancelarEdicao }) {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
 
 
   const [erro, setErro] = useState("")
+
+  // ==================== NOVO: carregar produto no formulário ====================
+  useEffect(() => {
+    if (produtoEmEdicao) {
+      setNome(produtoEmEdicao.nome);
+      setDescricao(produtoEmEdicao.descricao || "");
+      setPreco(produtoEmEdicao.preco);
+    }
+  }, [produtoEmEdicao]);
+  // ============================================================================
+
+  // ==================== NOVO: limpar formulário ====================
+  function limparFormulario() {
+    setNome("");
+    setDescricao("");
+    setPreco("");
+    setErro("");
+  }
+  // ================================================================
 
   function enviarFormulario(evento) {
     evento.preventDefault();
@@ -23,17 +43,32 @@ function FormProduto({ aoCadastrar }) {
 
     setErro("");
 
-
-    aoCadastrar({
+    const produto = {
       nome: nome.trim(),
       descricao: descricao.trim(),
       preco: Number(preco)
-    });
+    };
 
-    setNome("");
-    setDescricao("");
-    setPreco("");
+    // ==================== ALTERADO: cadastrar OU alterar ====================
+    if (produtoEmEdicao) {
+      aoAlterar({
+        id: produtoEmEdicao.id,
+        ...produto
+      });
+    } else {
+      aoCadastrar(produto);
+    }
+    // =======================================================================
+
+    limparFormulario();
   }
+
+  // ==================== NOVO: cancelar edição ====================
+  function cancelarEdicao() {
+    limparFormulario();
+    aoCancelarEdicao();
+  }
+  // ==============================================================
 
   return (
     <form className="formulario" onSubmit={enviarFormulario}>
@@ -41,8 +76,9 @@ function FormProduto({ aoCadastrar }) {
       <div className="titulo-formulario">
 
         <div>
-          <span className="tag">NOVO ITEM</span>
-          <h2>Cadastrar produto</h2>
+          {/* ALTERADO: título muda durante a edição */}
+          <span className="tag">{produtoEmEdicao ? "EDITANDO ITEM" : "NOVO ITEM"}</span>
+          <h2>{produtoEmEdicao ? "Alterar produto" : "Cadastrar produto"}</h2>
         </div>
         <span className="status-dot">ONLINE</span>
       </div>     
@@ -81,9 +117,25 @@ function FormProduto({ aoCadastrar }) {
           />
         </label>
       </div>
-          <button type="submit"> + Cadastrar produto</button>
-        
-      </form>
+
+      {/* ==================== ALTERADO: botões de cadastro/edição ==================== */}
+      <div className="acoes-formulario">
+        <button type="submit">
+          {produtoEmEdicao ? "Salvar alterações" : "+ Cadastrar produto"}
+        </button>
+
+        {produtoEmEdicao && (
+          <button type="button" className="botao-cancelar" onClick={cancelarEdicao}>
+            Cancelar
+          </button>
+        )}
+      </div>
+      {/* ============================================================================ */}
+
+      {/* NOVO: exibição da validação que já existia no estado erro */}
+      {erro && <p className="mensagem-erro">{erro}</p>}
+
+    </form>
     
   );
 }

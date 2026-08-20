@@ -1,6 +1,7 @@
 import Produto from "./Produto";
 
-function ListaProdutos({ produtos, busca }) {
+// ALTERADO: recebendo aoEditar e aoExcluir
+function ListaProdutos({ produtos, busca, aoEditar, aoExcluir }) {
 
 
   if (produtos.length === 0) {
@@ -43,7 +44,13 @@ function ListaProdutos({ produtos, busca }) {
 
       <div className="grid">
         {produtos.map((produto) => (
-          <Produto key={produto.id} produto={produto} />
+          // ALTERADO: repassando ações para cada card
+          <Produto
+            key={produto.id}
+            produto={produto}
+            aoEditar={aoEditar}
+            aoExcluir={aoExcluir}
+          />
         ))}
 
 

@@ -1,4 +1,5 @@
-function Produto({ produto }) {
+// ALTERADO: recebendo ações de editar e excluir
+function Produto({ produto, aoEditar, aoExcluir }) {
 
   return (
    
@@ -20,10 +21,20 @@ function Produto({ produto }) {
           R$ {Number(produto.preco).toFixed(2).replace(".", ",")}
         </strong>
       </div>
+
+      {/* ==================== NOVO: botões do CRUD ==================== */}
+      <div className="acoes-card">
+        <button type="button" className="botao-editar" onClick={() => aoEditar(produto)}>
+          Editar
+        </button>
+
+        <button type="button" className="botao-excluir" onClick={() => aoExcluir(produto.id)}>
+          Excluir
+        </button>
+      </div>
+      {/* ============================================================= */}
     </article>
   );
 }
 
 export default Produto;
-
-

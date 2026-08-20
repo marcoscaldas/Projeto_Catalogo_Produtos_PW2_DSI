@@ -510,3 +510,65 @@ input {
     text-align: center;
   }
 }
+
+/* =====================================================================
+   NOVO - EVOLUÇÃO CRUD: EDITAR E EXCLUIR
+   ===================================================================== */
+
+.acoes-formulario,
+.acoes-card {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.formulario .botao-cancelar {
+  color: var(--texto);
+  background: transparent;
+  border: 1px solid rgba(156, 169, 198, 0.35);
+  box-shadow: none;
+}
+
+.acoes-card {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(156, 169, 198, 0.13);
+}
+
+.acoes-card button {
+  flex: 1;
+  min-width: 90px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 800;
+  transition: 0.18s ease;
+}
+
+.botao-editar {
+  border: 1px solid rgba(53, 231, 255, 0.35);
+  color: var(--ciano);
+  background: rgba(53, 231, 255, 0.08);
+}
+
+.botao-excluir {
+  border: 1px solid rgba(255, 107, 122, 0.35);
+  color: #ff9aa5;
+  background: rgba(255, 107, 122, 0.08);
+}
+
+.acoes-card button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 650px) {
+  .acoes-formulario,
+  .acoes-card {
+    flex-direction: column;
+  }
+
+  .acoes-formulario button,
+  .acoes-card button {
+    width: 100%;
+  }
+}
